@@ -1,0 +1,9 @@
+data/*
+!data/manual_test/
+EuroSAT.zip
+
+.ipynb_checkpoints
+
+checkpoints*/*
+!checkpoints*/final
+
