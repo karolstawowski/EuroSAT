@@ -1,0 +1,55 @@
+Raport
+
+Problem: rozpoznawanie rodzaju zastosowania obszaru na podstawie obrazów satelitarnych
+
+Jako zbiór danych użyto danych pochodzących z repozytorium zdjęć satelitarnych EuroSAT. Zbiór danych korzysta ze zdjęć satelity Sentinel-2. Zbiór danych składa się z 27000 opisanych obrazów podzielonych na 10 klas decyzyjnych. 
+
+Do rozwiązania problemu zastosowano konwolucyjne sieci neuronowe. Wykorzystano cztery modele konwolucyjnych sieci neuronowych:
+- DenseNet121
+- ResNet50v2
+- VGG19
+- Xception
+
+Zbiór danych podzielono na trzy zestawy: 
+- treningowy,
+- testowy,
+- walidacyjny.
+Zbiór treningowy składa się z 60% obrazów (16200), zbiór testowy z 20% obrazów (5400), a zbiór walidacyjny z 20% obrazów (5400).
+
+Określono następujące parametry dla trenowanych sieci neuronowych:
+- learning rate: 0.0008
+- batch size: 32
+
+Każdą sieć neuronową przetrenowano przez 2 epoki. Następnie dokonano fine tuningu poprzez zablokowanie trenowania ostatniej warstwy sieci neuronowej. Każda sieć neuronowa składa się z różnej ilości warstw i każda z nich wymagała dostosowania ilości warstw, które należało zamrozić na proces fine tuningu.
+
+Wykorzystane sieci neuronowe składają się z następujących ilości warstw:
+- Densenet121: 429
+- ResNet50v2: 192
+- VGG19: 24
+- Xception: 134
+
+Proces fine tuningu był przeprowadzany przez jedną epokę. 
+
+Ostatecznie osiągnięto następujące wyniki dokładności rozpoznawania rodzaju terenu na podstawie zdjęć satelitarnych:
+- DenseNet121: 
+	- Train accuracy: 0.9530
+	- Test accuracy: 0.9580
+- ResNet50v2
+	- Train accuracy: 0.9403
+	- Test accuracy: 0.9592
+- VGG19
+	- Train accuracy: 0.7793
+	- Test accuracy: 0.8781
+- Xception
+	- Train accuracy: 0.9486
+	- Test accuracy: 0.9565
+
+Warto zwrócić uwagę, że rozmiar i złożoność, a tym samym czas trenowania modelu jest różny dla wymienionych modeli.
+- DenseNet121: 33MB, 8.1M parametrów,
+- ResNet50v2: 98MB, 25.6M parametrów,
+- VGG19: 549MB, 143.7M parametrów,
+- Xception: 88MB, 22.9M parametrów. 
+
+Zaskakująco, model z największą ilością parametrów - VGG19 - osiągnął najgorszy wynik. Najlepszy wynik osiągnął model z najmniejszą ilością parametrów - DenseNet121.
+
+Podsumowanie: problem rozpoznawania rodzaju terenu ze zdjęć satelitanych został rozwiązany przez zastosowanie głębokich sieci neuronowych z techniką fine tuning. Najlepszy wynik dokładności rozpoznawania obrazów został osiągnięty z pomocą modelu DenseNet121. 
